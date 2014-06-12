@@ -12,6 +12,8 @@ public class ToggleButton : MonoBehaviour {
 	static List<string> binaryOptions = new List<string>(){"ON", "OFF"};
 	public int OFF_INDEX = 1;
 	public int ONN_INDEX = 0;
+	public TestScriptBase testScript;
+	public string screen;
 
 	// Use this for initialization
 	void Start () {
@@ -25,7 +27,13 @@ public class ToggleButton : MonoBehaviour {
 	}
 
 	void SetTitle(){
-		title.text = prefix + " " + options[currentStringIndex];
+		string option = options[currentStringIndex];
+		title.text = prefix + " " + option;
+		if (testScript != null){
+			testScript.CheckState (screen, prefix, option);
+		} else {
+			Debug.Log ("BUTTON HAS NO testScript: " + prefix);
+		}
 	}
 
 	void OnMouseDown(){

@@ -34,12 +34,10 @@ public class ButtonMC : MonoBehaviour {
 	}
 
 	void OnMouseEnter(){
-		Debug.Log ("over button");
 		Toggle(true);
 	}
 
 	void OnMouseExit(){
-		Debug.Log ("off button");
 		Toggle(false);
 	}
 }

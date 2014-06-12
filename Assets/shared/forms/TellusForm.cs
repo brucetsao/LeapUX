@@ -11,7 +11,7 @@ public class TellusForm : MonoBehaviour {
 	float progress = 0f;
 	public static int exposure;
 
-	public static string myName = "Your Name";
+	public static string myName = "Your FULL Name";
 	// Use this for initialization
 	void Start () {
 		exposure = -1;
@@ -45,10 +45,10 @@ public class TellusForm : MonoBehaviour {
 
 		top -= (2 * (itemHeight + itemMargin)) * (1 - progress);
 
-		GUI.Label (new Rect (labelLeft, top, labelWidth, itemHeight), "Name");
+		GUI.Label (new Rect (labelLeft, top, labelWidth, itemHeight), "FULL Name");
 		TellusForm.myName = GUI.TextField(new Rect(left, top, itemWidth, itemHeight), TellusForm.myName, 25);
 
-		if (myName.Length > 4 && myName != "Your Name"){
+		if (myName.Length > 3 && myName != "Your FULL Name"){
 		GUI.Label (new Rect (labelLeft, top + (itemHeight + itemMargin), labelWidth, itemHeight), "Exposure");
 		exposure = GUI.Toolbar (new Rect (left, top + (itemHeight + itemMargin) * 1f, w - left - itemMargin, itemHeight), exposure, exposureStrings);
 		

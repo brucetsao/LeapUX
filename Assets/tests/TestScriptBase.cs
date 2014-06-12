@@ -33,7 +33,7 @@ public struct ClickStruct {
  * 
  */
 
-public class TestScriptBase : MonoBehaviour {
+public abstract class TestScriptBase : MonoBehaviour {
 	
 	protected TestScript script;
 	public string testName;
@@ -43,6 +43,7 @@ public class TestScriptBase : MonoBehaviour {
 	public List<string> iText = new List<string>();
 	
 	public TextMesh instructionText;
+	protected int state = -1;
 	
 	// Use this for initialization
 	void Start () {
@@ -53,13 +54,6 @@ public class TestScriptBase : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	}
-
-	public int state {
-		set { value = Mathf.Min (0, value); 
-			instructionText.text = iText[value]; _state = value;}
-		get { return _state;}
-	}
-
 	public void InitScript(){
 		script = new TestScript(testName);
 	}
@@ -70,6 +64,8 @@ public class TestScriptBase : MonoBehaviour {
 		}
 		clicks.Add(new ClickStruct(s, b));
 		script.AddFeedback("click " + s + ":" + b);
+
+		CheckState(s, b, "");
 	}
 	
 	public void AddClick(string s, string b, string v){
@@ -78,6 +74,7 @@ public class TestScriptBase : MonoBehaviour {
 		}
 		clicks.Add(new ClickStruct(s, b, v));
 		script.AddFeedback("click " + s + ":" + b + "=" + v);
+		CheckState(s, b, v);
 	}
 	
 	public void Finish(){
@@ -86,4 +83,6 @@ public class TestScriptBase : MonoBehaviour {
 			done = true;
 		}
 	}
+
+	public abstract void CheckState(string screen, string button, string value);
 }

@@ -18,13 +18,11 @@ public class HandButton : MonoBehaviour {
 	}
 	
 	void OnMouseDown(){
-		Debug.Log ("mouse Down");
 		hlHand.renderer.enabled = true;
 		baseHand.renderer.enabled = false;
 	}
 	
 	void OnMouseUp(){
-		Debug.Log ("mouse Up");
 		hlHand.renderer.enabled = false;
 		baseHand.renderer.enabled = true;
 	}

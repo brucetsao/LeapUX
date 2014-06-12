@@ -39,11 +39,14 @@ public class TestScript {
 	public string scriptName;
 	public float startTime;
 
-	public const string SCRIPT_FOLDER = "/Users/dave/test_data/"; // note MUST end with a slash
+	public string SCRIPT_FOLDER = "/Users/" + Environment.UserName + "/test_data/"; // note MUST end with a slash
 
 	public List<EventFeedback> feedback;
 
 	public TestScript(string name){
+
+		Debug.Log (" ============= There must be a path " + SCRIPT_FOLDER);
+
 		startTime = Time.time;
 		scriptName = name;
 		currentScript = this;
