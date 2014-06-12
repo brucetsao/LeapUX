@@ -15,7 +15,10 @@ public class SliderMC : MonoBehaviour {
 	public float maxValue = 100f;
 	public string suffix = "%";
 
-	bool active;
+	public TestScriptBase testBase;
+	public string screenName;
+
+	bool active; 
 
 	// Use this for initialization
 	void Start () {
@@ -34,7 +37,7 @@ public class SliderMC : MonoBehaviour {
 
 			float x = Mathf.Min (sliderWidth + transform.position.x, Mathf.Max (transform.position.x, worldMouse.x));
 
-			float ratio = (x - transform.position.x)/sliderWidth;
+			ratio = (x - transform.position.x)/sliderWidth;
 
 			title.text = phrase + ": " + Mathf.Round (maxValue * ratio) + suffix;
 
@@ -45,6 +48,10 @@ public class SliderMC : MonoBehaviour {
 	void OnMouseUp(){
 		active = false;
 		Debug.Log ("not moving the thumb");
+
+		if (testBase != null){
+			testBase.AddClick(screenName, phrase, Mathf.Round(maxValue * ratio).ToString());
+		}
 	}
 
 	void OnMouseDown(){

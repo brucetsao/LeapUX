@@ -1,22 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 
+public class StopTest : GoScene {
 
-
-public class Test1Script : TestScriptBase {
+	public TestScriptBase testBase;
 
 	// Use this for initialization
 	void Start () {
-		InitScript();
+	
 	}
 	
 	// Update is called once per frame
 	void Update () {
+	
 	}
 
-	public void Report(){
-		script.Report ();
+	void OnMouseDown(){
+		testBase.Finish();
+		Application.LoadLevel(targetSceneName);
 	}
-
 }

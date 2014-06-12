@@ -2,11 +2,11 @@
 using System.Collections;
 
 public class ButtonMC : MonoBehaviour {
-	public TextMesh title;
 
 	public GameObject onInstance;
 	public GameObject offInstance;
 	public static Vector3 TITLE_POSITION = new Vector3(0, -0.1116991f, -1f);
+	public TextMesh title;
 
 	// Use this for initialization
 	void Start () {
@@ -19,6 +19,7 @@ public class ButtonMC : MonoBehaviour {
 	void Update () {
 	}
 
+	// flips the backgrounds on rollover/out
 	void Toggle(bool overMe){
 		if (overMe){
 			((SpriteRenderer) onInstance.GetComponent<SpriteRenderer>()).enabled = true;

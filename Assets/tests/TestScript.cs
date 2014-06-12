@@ -4,6 +4,10 @@ using System.Collections.Generic;
 using System;
 using System.IO;
 
+/**
+ * Records a single log event
+ */
+
 public struct EventFeedback {
 	public float time;
 	public string feedback;
@@ -20,7 +24,13 @@ public struct EventFeedback {
 }
 
 /* 
- * This is a parent class for all tests
+ * This class represents a stream of data that will ultimately be saved as a report.
+ * It is similar to a unix log: messages are simply open strings, with a time number as a prefix
+ * to let you know how much time passed. 
+ * 
+ * The time is absolute in seconds /float; the actual date of the test is noted in the header.
+ * 
+ * Note this is NOT a monobehavior -- just a basic utility class. 
  */
 
 public class TestScript {
@@ -40,9 +50,12 @@ public class TestScript {
 		feedback = new List<EventFeedback>();
 
 		feedback.Add (new EventFeedback(" ================= START OF SCRIPT " + scriptName + " ======================="));
-		feedback.Add (new EventFeedback(" Taken "));
+		feedback.Add (new EventFeedback("............ Taken ............."));
       feedback.Add (new EventFeedback(System.DateTime.UtcNow.ToLongDateString()));
       feedback.Add (new EventFeedback(System.DateTime.UtcNow.ToLongTimeString()));
+		feedback.Add (new EventFeedback("............. User ............."));
+		feedback.Add (new EventFeedback(TellusForm.myName));
+		feedback.Add (new EventFeedback(TellusForm.userLevel()));
       feedback.Add (new EventFeedback(" ==============================================================================="));
 	}
 

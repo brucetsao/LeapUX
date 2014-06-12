@@ -5,12 +5,11 @@ public class HandButton : MonoBehaviour {
 
 	public GameObject baseHand;
 	public GameObject hlHand;
-	public GameObject handler;
-
+	public TextMesh title;
 
 	// Use this for initialization
 	void Start () {
-
+		title.renderer.sortingLayerName = "Labels";
 		OnMouseUp ();
 	}
 	
