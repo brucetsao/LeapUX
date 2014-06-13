@@ -10,7 +10,7 @@ public class Test1Script : TestScriptBase {
 
 	// Use this for initialization
 	void Start () {
-		InitScript();
+		InitScript("Goatcraft - mouse");
 	}
 	
 	// Update is called once per frame

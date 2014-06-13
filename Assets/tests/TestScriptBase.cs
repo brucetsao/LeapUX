@@ -47,14 +47,14 @@ public abstract class TestScriptBase : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		InitScript();
-		state = 0;
+		// NOTE : MUST OVERRIDE to initialize script. 
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	}
-	public void InitScript(){
+
+	public void InitScript(string testName){
 		script = new TestScript(testName);
 	}
 	

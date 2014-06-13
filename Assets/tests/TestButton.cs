@@ -1,19 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class TestButton : MonoBehaviour {
 
 	static TestButton lastHovered;
+	const int NUM_IMAGES = 5;
+
+	static List<string> names = new List<string>(){"Goatcraft - mouse", "Goatcraft LMC - v1", "", "", "", "", "", "", "", "", "", "", "", "", ""};
 
 	public GameObject hover;
-
-	const int NUM_IMAGES = 5;
 	public Sprite[] sprites = new Sprite[NUM_IMAGES];
-
 	public int testNumber;
-
+	
 	public GameObject title;
-		public GameObject icon;
+	public GameObject icon;
 	// Use this for initialization
 	void Start () {
 		hover.SetActive(false);
@@ -28,7 +29,7 @@ public class TestButton : MonoBehaviour {
 		testNumber = i;
 		int imageNumber = i % NUM_IMAGES;
 		icon.GetComponent<SpriteRenderer> ().sprite = sprites[imageNumber];
-		ButtonTitle ("Test " + (i + 1).ToString());
+		ButtonTitle (names[i]);
 		}
 
 	public void ButtonTitle(string s){
