@@ -32,7 +32,7 @@ public class ToggleButton : MonoBehaviour {
 		if (testScript != null){
 			testScript.CheckState (screen, prefix, option);
 		} else {
-			Debug.Log ("BUTTON HAS NO testScript: " + prefix);
+			//Debug.Log ("BUTTON HAS NO testScript: " + prefix);
 		}
 	}
 

@@ -11,10 +11,21 @@ public class Test2Script : TestScriptBase {
 	// Use this for initialization
 	void Start () {
 		InitScript("Test 2 - Goatcraft Leap Motion Controller - V1");
+
+		instructionText.text = "Swipe over the \"Start Test\" button to begin the test";
+		iText[0] = "Tap the \"Options\" button to open the configuration screens";
+		iText[1] = "Set the Master Volume to 50% (Under \"Music & Sound\")";
+		iText[2] = "Very Good! Return to the Configuration home screen by clicking the  \"Done\" button";
+		iText[3] = "Now set the \"3D Anaglyph\" to \"on\" in the \"Video Settings\" panel";
+
+		InitLeap();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
+		if (leapController != null){
+			SetLeapCursorPosition(leapController.Frame ());
+		}
 	}
 
 	public void Report(){
