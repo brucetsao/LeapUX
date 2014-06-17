@@ -14,7 +14,7 @@ public struct ClickStruct
 		public string screen;
 		public string button;
 		public string value;
-	
+
 		public ClickStruct (string s, string b)
 		{
 				screen = s;
@@ -27,6 +27,7 @@ public struct ClickStruct
 				screen = s;
 				button = b;
 				value = v;
+
 		}
 }
 
@@ -40,12 +41,16 @@ public struct ButtonStruct
 		public ButtonLeapEnabled button;
 		public string gesture;
 		public bool active;
+		public float width;
+		public float height;
 
-		public ButtonStruct (ButtonLeapEnabled b, string g)
+		public ButtonStruct (ButtonLeapEnabled b, string g, float w, float h)
 		{
 				button = b;
 				gesture = g;
 				active = true;
+				width = w;
+				height = h;
 		}
 }
 
@@ -111,9 +116,9 @@ public abstract class TestScriptBase : MonoBehaviour
 				script = new TestScript (testName);
 		}
 
-		public void ListenToButton (ButtonLeapEnabled button)
+		public ButtonStruct ListenToButton (ButtonLeapEnabled button)
 		{
-				ListenToButton (button, "wave");
+				return ListenToButton (button, "wave", 3.0f, 0.4f);
 		}
 
 		public bool SetLeapCursorPosition (Frame leapFrame)
@@ -128,7 +133,7 @@ public abstract class TestScriptBase : MonoBehaviour
 				leapCursorPosition.x -= orthoCamera.orthographicSize / 2;
 				float ySize = orthoCamera.orthographicSize * orthoCamera.aspect;
 				leapCursorPosition.y *= ySize;
-				leapCursorPosition.y -= ySize/2;
+				leapCursorPosition.y -= ySize / 2;
 
 				if (cursorGraphic != null) {
 						cursorGraphic.transform.position = new Vector3 (leapCursorPosition.x, leapCursorPosition.y, 0);
@@ -145,8 +150,32 @@ public abstract class TestScriptBase : MonoBehaviour
 						return;
 				}
 
-				foreach (ButtonStruct b in leapButtons) {
+				Vector3 cursorPos = new Vector3 (cursorGraphic.transform.position.x, cursorGraphic.transform.position.y, 0);
 
+				foreach (ButtonStruct b in leapButtons) {
+						Vector3 cursorRel = cursorPos - b.button.transform.position;
+						cursorRel.y *= -1;
+
+
+						if ((cursorRel.x >= 0) && (cursorRel.x <= b.width) && (cursorRel.y >= 0) && (cursorRel.y <= b.height)) {
+								b.button.Hover (true);
+
+								switch (b.gesture) {
+								case "wave": 
+										b.button.AddWave (true, cursorRel);
+										break;
+
+								}
+
+
+						} else {
+								b.button.Hover (false);
+								switch (b.gesture) {
+								case "wave":
+										b.button.AddWave (false);
+										break;
+								}
+						}
 				}
 		}
 
@@ -161,11 +190,11 @@ public abstract class TestScriptBase : MonoBehaviour
 				throw new UnityException ("Cannot find match for gesture " + gesture);
 		}
 
-		public ButtonStruct ListenToButton (ButtonLeapEnabled button, string gesture)
+		public ButtonStruct ListenToButton (ButtonLeapEnabled button, string gesture, float w, float h)
 		{
 				TestGesture (gesture);
 
-				ButtonStruct bs = new ButtonStruct (button, gesture);
+				ButtonStruct bs = new ButtonStruct (button, gesture, w, h);
 				leapButtons.Add (bs);
 				return bs;
 		}

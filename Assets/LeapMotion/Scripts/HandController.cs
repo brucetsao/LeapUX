@@ -11,7 +11,7 @@ using Leap;
 public class HandController : MonoBehaviour {
 
   // Reference distance from thumb base to pinky base in mm.
-  protected const float MODEL_PALM_WIDTH = 200.0f;
+  protected const float MODEL_PALM_WIDTH = 400.0f;
 
   public bool separateLeftRight = false;
   public HandModel leftGraphicsModel;

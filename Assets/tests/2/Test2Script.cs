@@ -7,6 +7,8 @@ using System.Collections.Generic;
 public class Test2Script : TestScriptBase {
 
 	public GameObject doneButton;
+	public ButtonStruct startButton;
+	public ButtonLeapEnabled startButtonLE;
 
 	// Use this for initialization
 	void Start () {
@@ -19,12 +21,14 @@ public class Test2Script : TestScriptBase {
 		iText[3] = "Now set the \"3D Anaglyph\" to \"on\" in the \"Video Settings\" panel";
 
 		InitLeap();
+		startButton = ListenToButton(startButtonLE, "wave", 6.0f, 1f);
+
 	}
 
 	// Update is called once per frame
 	void Update () {
 		if (leapController != null){
-			SetLeapCursorPosition(leapController.Frame ());
+			HoverButtons(leapController.Frame ());
 		}
 	}
 
